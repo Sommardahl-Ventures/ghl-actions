@@ -1,0 +1,29 @@
+{
+  "name": "pipedream_actions",
+  "version": "1.0.5",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "bump-actions": "export VERSION=\"1.0.$GITHUB_RUN_NUMBER\" && replace-in-files --string='9.9.9' --replacement=$VERSION './src/actions/**/*.js'",
+    "publish": "./deploy-actions.sh",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bsommardahl/pipedream_actions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bsommardahl/pipedream_actions/issues"
+  },
+  "homepage": "https://github.com/bsommardahl/pipedream_actions#readme",
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "replace-in-files-cli": "^2.0.0"
+  },
+  "dependencies": {
+    "knex": "^1.0.3",
+    "pg": "^8.7.3"
+  }
+}

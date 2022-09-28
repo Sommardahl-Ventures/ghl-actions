@@ -1,0 +1,32 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish-components:
+    name: Publish Components to Pipedream Registry
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.4.0
+      - name: Install pd cli
+        env:
+          PD_API_KEY: ${{ secrets.PD_API_KEY }}
+        run: |
+          curl https://cli.pipedream.com/install | sudo sh
+          mkdir -p $HOME/.config/pipedream
+          echo "api_key = $PD_API_KEY" > $HOME/.config/pipedream/config
+      - name: Prepare
+        run: |
+          npm i
+          npm run bump-actions 
+      - name: Run Tests
+        run: |
+          npm t
+      - name: Publish actions
+        id: publish
+        run: ./deploy-actions.sh
+      - name: Remove pd cli config
+        run: |
+          rm $HOME/.config/pipedream/config
