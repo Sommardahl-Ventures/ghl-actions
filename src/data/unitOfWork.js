@@ -1,4 +1,4 @@
-import axios from "axios";
+const axios = require("axios");
 
 async function init(auth) {
   const axiosClient = axios.create({
