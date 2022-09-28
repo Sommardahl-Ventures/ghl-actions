@@ -1,6 +1,6 @@
-const { work } = require("./db");
+const { work } = require("./unitOfWork");
 
-test("Getting the db", async () => {
+test("Getting the unit of work", async () => {
   const auth = { test: "test" };
   const res = await work(auth, async (db) => {
     expect(db).toBeDefined();
